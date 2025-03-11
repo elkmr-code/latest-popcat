@@ -78,6 +78,67 @@
     <img class="title" src="imgs/popcat.svg" alt="POPCAT">
     <div class="cat-img" id="p">0202</div>
 </div>
+<script>
+    //用 javascript 預載張嘴圖片 op.png
+    const img = new Image();
+    img.src = "imgs/op.png";
+
+
+    //計數器初始化
+    let count = 0;
+    //用 id 抓取 文字的 HTML 元素
+    const catImg = document.getElementById("p");
+    //顯示計數器的數字
+    catImg.innerText = count;
+
+    //寫一個function 計數器累加
+    function addCount() {
+        count++;
+    }
+
+    //註冊滑鼠按下的事件，呼叫計數器累加 function
+    //註冊滑鼠按下的時候，更新計數器的顯示
+    //當滑鼠按下，切換張嘴圖片
+    //當滑鼠按下，播放 pops/pop1.mp3
+    //當滑鼠按下，可以輪流播放 pop1-4 的 mp3
+    document.addEventListener("mousedown", function() {
+        addCount();
+        catImg.innerText = count;
+        catImg.id = "op";
+        const audio = new Audio(`pop/pop${Math.floor(Math.random() * 4)}.mp3`);
+        audio.play();
+    });
+
+    //註冊滑鼠放開的事件，切換閉嘴圖片
+    // 滑鼠放開後，等待 25 毫秒，再切回閉嘴圖片
+    document.addEventListener("mouseup", function() {
+        setTimeout(function() {
+            catImg.id = "p";
+        }, 25);
+    });
+
+    //除了滑鼠，也可以用鍵盤互動
+    //註冊鍵盤按下的事件，呼叫計數器累加 function
+    //註冊鍵盤按下的時候，更新計數器的顯示
+    //當鍵盤按下，切換張嘴圖片
+    //當鍵盤按下，播放 pops/pop1.mp3
+    document.addEventListener("keydown", function() {
+        addCount();
+        catImg.innerText = count;
+        catImg.id = "op";
+        const audio = new Audio("pops/pop1.mp3");
+        audio.play();
+    });
+    //註冊鍵盤放開的事件，切換閉嘴圖片
+    //鍵盤放開後，等待 25 毫秒，再切回閉嘴圖片
+    document.addEventListener("keyup", function() {
+        setTimeout(function() {
+            catImg.id = "p";
+        }, 25);
+    });
+
+
+</script>
 
 </body>
 </html>
